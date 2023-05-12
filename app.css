@@ -1,0 +1,54 @@
+/* Add CSS styles for the game board and cards here */
+#game-board {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 10px;
+	margin: 50px auto;
+	width: 600px;
+}
+
+.card {
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	height: 150px;
+	overflow: hidden;
+	position: relative;
+	transform: perspective(1000px) rotateY(0);
+	transition: transform 0.5s;
+	width: 100%;
+}
+
+.card.flip {
+	transform: perspective(1000px) rotateY(180deg);
+}
+
+.card .front,
+.card .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.card .front {
+	background-color: #6ca0dc;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4rem;
+	color: #fff;
+}
+
+.card .back {
+	background-color: #f0ad4e;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4rem;
+	color: #fff;
+	transform: rotateY(180deg);
+}

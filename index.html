@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Memory Game</title>
+	<style>
+		/* Add CSS styles for the game board and cards here */
+		#game-board {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-gap: 10px;
+			margin: 50px auto;
+			width: 600px;
+		}
+
+		.card {
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			cursor: pointer;
+			height: 150px;
+			overflow: hidden;
+			position: relative;
+			transform: perspective(1000px) rotateY(0);
+			transition: transform 0.5s;
+			width: 100%;
+		}
+
+		.card.flip {
+			transform: perspective(1000px) rotateY(180deg);
+		}
+
+		.card .front,
+		.card .back {
+			backface-visibility: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		.card .front {
+			background-color: #6ca0dc;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 4rem;
+			color: #fff;
+		}
+
+		.card .back {
+			background-color: #f0ad4e;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 4rem;
+			color: #fff;
+			transform: rotateY(180deg);
+		}
+	</style>
+</head>
+<body>
+	<div id="game-board">
+		<!-- Use JavaScript to generate the card grid dynamically -->
+	</div>
+
+	<script>
+		const cards = [
+			{ id: 1, img: 'image1.jpg' },
+			{ id: 2, img: 'image2.jpg' },
+			{ id: 3, img: 'image3.jpg' },
+			{ id: 4, img: 'image4.jpg' },
+			{ id: 5, img: 'image5.jpg' },
+			{ id: 6, img: 'image6.jpg' },
+			{ id: 7, img: 'image7.jpg' },
+			{ id: 8, img: 'image8.jpg' },
+		];
+
+		const gameBoard = document.querySelector('#game-board');
+
+		function createCard(card) {
+			const cardElement = document.createElement('div');
+			cardElement.classList.add('card');
+			cardElement.dataset.id = card.id;
+
+			const frontElement = document.createElement('div');
+			frontElement.classList.add('front');
+
+			const backElement = document.createElement('div');
+			backElement.classList.add('back');
+			backElement.style.backgroundImage = `url(${card.img})`;
+
+			cardElement.appendChild(frontElement);
+			cardElement.appendChild(backElement);
+			gameBoard.appendChild(cardElement);
+
+			cardElement.addEventListener('click', () => {
+				cardElement.classList.add('flip');
+			});
+		}
+
+		function shuffleCards() {
+			for (let i = cards.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[cards[i], cards[j]] = [cards[j], cards
